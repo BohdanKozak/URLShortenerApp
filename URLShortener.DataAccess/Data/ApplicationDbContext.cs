@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using URLShortener.Models;
 
 namespace URLShortener.DataAccess.Data
@@ -14,6 +15,9 @@ namespace URLShortener.DataAccess.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+
             modelBuilder.Entity<UrlItem>().HasData(
                 new UrlItem { Id = 1, Url = "https://www.youtube.com/watch?v=pQYr1LbVFaM&ab_channel=XGTVUA", CreatedDate = DateTime.Now },
                 new UrlItem { Id = 2, Url = "https://open.spotify.com/queue", CreatedDate = DateTime.Now },

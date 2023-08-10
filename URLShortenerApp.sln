@@ -5,11 +5,11 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URLShortener", "URLShortener\URLShortener.csproj", "{D41D1877-0536-43C6-9AF3-AB3E5D7AF539}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Models", "UrlShortener.Models\UrlShortener.Models.csproj", "{780D481A-4220-4FEA-ABF2-B0694CC51D2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrlShortener.Models", "UrlShortener.Models\UrlShortener.Models.csproj", "{780D481A-4220-4FEA-ABF2-B0694CC51D2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener.DataAccess", "URLShortener.DataAccess\URLShortener.DataAccess.csproj", "{231FB362-1EBD-4A8A-8D3D-3ECBBC2FD5DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URLShortener.DataAccess", "URLShortener.DataAccess\URLShortener.DataAccess.csproj", "{231FB362-1EBD-4A8A-8D3D-3ECBBC2FD5DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLShortener.Utility", "URLShortener.Utility\URLShortener.Utility.csproj", "{47CB3A01-5B1E-46C8-8BC5-C7E3ADDDB49A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URLShortener.Utility", "URLShortener.Utility\URLShortener.Utility.csproj", "{47CB3A01-5B1E-46C8-8BC5-C7E3ADDDB49A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
