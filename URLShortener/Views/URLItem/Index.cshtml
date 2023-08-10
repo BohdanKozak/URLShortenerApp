@@ -1,6 +1,6 @@
 ﻿@model List<UrlItem>
 
-<div class="card shadow border-0 mt-4">
+<div class="card shadow border-0 mt-4 mb-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -38,15 +38,16 @@
             @foreach (var obj in Model)
             {
                 <tr>
-                    <td>@obj.Url</td>
-                    <td>
+                    <td class="w-40">@obj.Url</td>
+                    <td class="w-40">
                         @obj.ShortedUrl
                     </td>
-                    <td>
+                    <td class="w-10">
                         <div class=" w-75 btn-group" role="group">
-                            <a asp-controller="" asp-action="" asp-route-id="@obj.Id" class="btn btn-danger ">
+                            <a asp-controller="URLItem" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger ">
                                 <i class="bi bi-trash-fill"></i> Delete
                             </a>
+ 
                             <a asp-controller="" asp-action="" asp-route-id="@obj.Id" class="btn btn-primary ">
                                 Details
                             </a>

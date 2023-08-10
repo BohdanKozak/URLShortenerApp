@@ -18,15 +18,6 @@ namespace URLShortener.DataAccess.Repository
             this.dbSet = _db.Set<T>();
 
         }
-        public void Add(T entity)
-        {
-            dbSet.Add(entity);
-        }
-
-        public void AddRange(IEnumerable<T> entities)
-        {
-            dbSet.AddRange(entities);
-        }
 
         public T Get(Expression<Func<T, bool>> filter)
         {

@@ -11,6 +11,12 @@ namespace URLShortener.DataAccess.Repository
         {
             _db = db;
         }
+
+        public void Add(UrlItem entity)
+        {
+            entity.CreatedDate = DateTime.Now;
+            _db.Add(entity);
+        }
         public void Update(UrlItem obj)
         {
             _db.Update(obj);
