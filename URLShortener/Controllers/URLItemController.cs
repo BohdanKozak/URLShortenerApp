@@ -49,6 +49,7 @@ namespace URLShortener.Controllers
             {
                 var shortCode = ShortId.Generate(new GenerationOptions(length: 9));
                 obj.ShortedUrl = $"{ServiceUrl}?u={shortCode}";
+                obj.ShortCode = shortCode;
             }
             else
             {
