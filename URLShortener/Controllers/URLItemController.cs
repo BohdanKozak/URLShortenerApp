@@ -1,27 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using shortid;
+using shortid.Configuration;
 using URLShortener.DataAccess.Repository.IRepository;
 using URLShortener.Models;
+
 
 namespace URLShortener.Controllers
 {
 
     public class URLItemController : Controller
+
     {
         private readonly IUnitOfWork _unitOfWork;
-
+        private const string ServiceUrl = "http://localhost:7254";
         public URLItemController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+
         public IActionResult Index()
         {
             List<UrlItem> UrlItems = _unitOfWork.UrlItem.GetAll().ToList();
             return View(UrlItems);
         }
+
         public IActionResult Create()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Create(UrlItem obj)
         {
@@ -35,27 +42,46 @@ namespace URLShortener.Controllers
             }
 
 
+            string? longUrl = obj.Url;
+            var shortenedUrlCollection = _unitOfWork.UrlItem.GetAll();
+            var shortenedUrl = shortenedUrlCollection.FirstOrDefault(x => x.Url == longUrl);
+            if (shortenedUrl == null)
+            {
+                var shortCode = ShortId.Generate(new GenerationOptions(length: 9));
+                obj.ShortedUrl = $"{ServiceUrl}?u={shortCode}";
+            }
+            else
+            {
+                ModelState.AddModelError("url", "The url is already Exist");
+            }
+
+
+
             if (ModelState.IsValid)
             {
 
                 _unitOfWork.UrlItem.Add(obj);
                 _unitOfWork.Save();
-
                 return RedirectToAction("Index");
             }
+
+
             return View();
         }
+
         public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
             var url = _unitOfWork.UrlItem.Get(item => item.Id == id);
             if (url == null)
             {
                 return NotFound();
             }
+
             _unitOfWork.UrlItem.Remove(url);
             _unitOfWork.Save();
 
@@ -67,7 +93,6 @@ namespace URLShortener.Controllers
             UrlItem UrlItems = _unitOfWork.UrlItem.Get(item => item.Id == id);
             return View(UrlItems);
         }
-
 
 
     }
