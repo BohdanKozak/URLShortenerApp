@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace URLShortener.Migrations
+namespace URLShortener.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddUrlItemToDb : Migration

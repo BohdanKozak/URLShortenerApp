@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using URLShortener.Data;
+using URLShortener.DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

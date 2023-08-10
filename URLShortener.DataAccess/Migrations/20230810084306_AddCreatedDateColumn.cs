@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace URLShortener.Migrations
+namespace URLShortener.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCreatedDateColumn : Migration
