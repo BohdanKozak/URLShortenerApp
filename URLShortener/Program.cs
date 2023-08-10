@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using URLShortener.DataAccess.Data;
+using URLShortener.DataAccess.Repository;
+using URLShortener.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddRazorPages();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
