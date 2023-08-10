@@ -18,5 +18,21 @@ namespace URLShortener.Controllers
             List<UrlItem> UrlItems = _unitOfWork.UrlItem.GetAll().ToList();
             return View(UrlItems);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(UrlItem obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.UrlItem.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "UrlItem created successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

@@ -16,7 +16,7 @@
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="" asp-action="" class="btn btn-primary">
+                <a asp-controller="URLItem" asp-action="Create" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i>  Add New URL
                 </a>
             </div>
@@ -43,9 +43,12 @@
                         @obj.ShortedUrl
                     </td>
                     <td>
-                        <div class="w-75 btn-group" role="group">
-                            <a asp-controller="" asp-action="" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                        <div class=" w-75 btn-group" role="group">
+                            <a asp-controller="" asp-action="" asp-route-id="@obj.Id" class="btn btn-danger ">
                                 <i class="bi bi-trash-fill"></i> Delete
+                            </a>
+                            <a asp-controller="" asp-action="" asp-route-id="@obj.Id" class="btn btn-primary ">
+                                Details
                             </a>
                         </div>
                     </td>
