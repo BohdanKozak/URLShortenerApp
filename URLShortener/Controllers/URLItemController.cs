@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using shortid;
 using shortid.Configuration;
 using URLShortener.DataAccess.Repository.IRepository;
 using URLShortener.Models;
+
 
 
 namespace URLShortener.Controllers
@@ -11,11 +13,13 @@ namespace URLShortener.Controllers
     public class URLItemController : Controller
 
     {
+        UserManager<IdentityUser> UserManager;
         private readonly IUnitOfWork _unitOfWork;
         private const string ServiceUrl = "http://localhost:7254";
-        public URLItemController(IUnitOfWork unitOfWork)
+        public URLItemController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            UserManager = userManager;
         }
 
         public IActionResult Index()
@@ -50,6 +54,7 @@ namespace URLShortener.Controllers
                 var shortCode = ShortId.Generate(new GenerationOptions(length: 9));
                 obj.ShortedUrl = $"{ServiceUrl}?u={shortCode}";
                 obj.ShortCode = shortCode;
+                obj.CreatedBy = UserManager.GetUserName(User);
             }
             else
             {
