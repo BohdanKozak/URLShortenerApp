@@ -6,7 +6,7 @@ namespace URLShortener.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private ApplicationDbContext _db;
-        public IUrlItemRepository UrlItem { get; private set; }
+        public IUrlItemRepository UrlItem { get; set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {

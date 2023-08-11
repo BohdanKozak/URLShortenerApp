@@ -13,7 +13,7 @@ namespace URLShortener.DataAccess.Data
         }
 
 
-        DbSet<UrlItem> UrlItems { get; set; }
+        public DbSet<UrlItem> UrlItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

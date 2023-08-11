@@ -16,6 +16,8 @@ namespace URLShortener.Controllers
             _description = DescriptionModel.LoadFromFile(filePath);
         }
 
+        public DescriptionModel Description { get; set; }
+
         public IActionResult Index()
         {
             return View(_description);
@@ -34,7 +36,8 @@ namespace URLShortener.Controllers
 
             if (newText != null)
             {
-                _description.Text = newText.Text;
+                _description = newText;
+
                 _description.SaveToFile(filePath);
                 TempData["success"] = "Description updated successfully";
                 return RedirectToAction("Index");

@@ -56,17 +56,9 @@ namespace URLShortener.Controllers
             {
                 var shortCode = ShortId.Generate(new GenerationOptions(length: 9));
 
-
-
-
                 obj.ShortedUrl = $"{ServiceUrl}/{shortCode}";
 
-                if (obj.Url != null) UrlItem.urlMappings.Add(obj.ShortedUrl, obj.Url);
-
-
                 obj.ShortCode = shortCode;
-
-
 
                 obj.CreatedBy = UserManager.GetUserName(User);
             }
