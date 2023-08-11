@@ -5,7 +5,7 @@ using URLShortener.DataAccess.Repository.IRepository;
 using URLShortener.Models;
 
 
-namespace URLShortener.Areas.User.Controllers
+namespace URLShortener.Controllers
 {
 
     public class URLItemController : Controller

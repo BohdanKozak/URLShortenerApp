@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace URLShortener.Utility
+﻿namespace URLShortener.Utility
 {
-    internal class SD
+    public static class SD
     {
+        public const string Role_USER = "Customer";
+        public const string Role_Admin = "Admin";
     }
 }

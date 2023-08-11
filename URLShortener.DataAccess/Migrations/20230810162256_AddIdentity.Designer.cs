@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using URLShortener.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using URLShortener.DataAccess.Data;
 namespace URLShortener.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230810162256_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,19 +256,19 @@ namespace URLShortener.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 8, 11, 9, 11, 49, 54, DateTimeKind.Local).AddTicks(2232),
+                            CreatedDate = new DateTime(2023, 8, 10, 19, 22, 55, 854, DateTimeKind.Local).AddTicks(3877),
                             Url = "https://www.youtube.com/watch?v=pQYr1LbVFaM&ab_channel=XGTVUA"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 8, 11, 9, 11, 49, 54, DateTimeKind.Local).AddTicks(2235),
+                            CreatedDate = new DateTime(2023, 8, 10, 19, 22, 55, 854, DateTimeKind.Local).AddTicks(3881),
                             Url = "https://open.spotify.com/queue"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 8, 11, 9, 11, 49, 54, DateTimeKind.Local).AddTicks(2239),
+                            CreatedDate = new DateTime(2023, 8, 10, 19, 22, 55, 854, DateTimeKind.Local).AddTicks(3884),
                             Url = "https://mail.google.com/mail/u/0/#inbox"
                         });
                 });
