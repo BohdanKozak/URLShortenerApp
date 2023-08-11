@@ -1,31 +1,59 @@
 ﻿@model UrlShortener.Models.DescriptionModel?
-
-<div class="card-header bg-secondary bg-gradient ml-0 py-3">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h2 class="text-white py-2">Edit Description</h2>
+<div class="card shadow border-0 mt-4 mb-5">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Edit Description</h2>
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="card-body p-4">
-    <form method="post">
-        
-        <div class="form-floating py-2 col-12">
-            <input asp-for="Text" class="form-control border-0 shadow" />
-            <label asp-for="Text" class="ms-2"></label>
-            <span asp-validation-for="Text" class="text-danger"></span>
-        </div>
-        <div class="row mt-3">
-            <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary form-control">Update</button>
+    <div class="card-body p-4">
+        <form method="post">
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Author" class="form-control border-0 shadow" />
+                <label asp-for="Author" class="ms-2 text-muted"></label>
+                <span asp-validation-for="Author" class="text-danger"></span>
             </div>
-            <div class="col-6 col-md-3">
-                <a asp-controller="Description" asp-action="Index" class="btn btn-secondary border  form-control">
-                    Back to List
-                </a>
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Title" class="form-control border-0 shadow" />
+                <label asp-for="Title" class="ms-2 text-muted"></label>
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-        </div>
-    </form>
+            <div class="py-2 col-12">
+                <label asp-for="Text" class="ms-2 text-muted"></label>
+                <textarea asp-for="Text" class="form-control border-0 shadow"></textarea>
+
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-controller="Description" asp-action="Index" class="btn btn-secondary border  form-control">
+                        Back to List
+                    </a>
+                </div>
+              
+            </div>
+        </form>
+    </div>
 </div>
+@section Scripts
+    {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons   lists   table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+        });
+    </script>
+}
