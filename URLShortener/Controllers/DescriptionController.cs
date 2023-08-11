@@ -13,20 +13,33 @@ namespace URLShortener.Controllers
 
         public DescriptionController()
         {
-
-
-            //_description = DescriptionModel.LoadFromFile(Path.Combine(filePath, fileName));
-
+            _description = DescriptionModel.LoadFromFile(filePath);
         }
 
         public IActionResult Index()
         {
-            var editableContent = DescriptionModel.LoadFromFile(filePath);
-
-            return View(editableContent);
+            return View(_description);
         }
 
 
+        public IActionResult Edit()
+        {
+            return View(_description);
+        }
 
+        [HttpPost]
+        public IActionResult Edit(DescriptionModel newText)
+        {
+
+
+            if (newText != null)
+            {
+                _description.Text = newText.Text;
+                _description.SaveToFile(filePath);
+                TempData["success"] = "Description updated successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

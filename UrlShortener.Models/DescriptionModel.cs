@@ -4,6 +4,10 @@ namespace UrlShortener.Models
 {
     public class DescriptionModel
     {
+        public DescriptionModel()
+        {
+
+        }
         public DescriptionModel(string text, string title, string author)
         {
             Text = text;
