@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using shortid;
 using shortid.Configuration;
 using URLShortener.DataAccess.Repository.IRepository;
 using URLShortener.Models;
-
+using URLShortener.Utility;
 
 
 namespace URLShortener.Controllers
@@ -28,6 +29,7 @@ namespace URLShortener.Controllers
             return View(UrlItems);
         }
 
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_USER)]
         public IActionResult Create()
         {
             return View();
@@ -100,6 +102,20 @@ namespace URLShortener.Controllers
             return View(UrlItems);
         }
 
+        public IActionResult DeleteAll()
+        {
 
+            List<UrlItem> UrlItems = _unitOfWork.UrlItem.GetAll().ToList();
+
+            foreach (var urlItem in UrlItems)
+            {
+
+                _unitOfWork.UrlItem.Remove(urlItem);
+
+
+            }
+            _unitOfWork.Save();
+            return RedirectToAction("Index");
+        }
     }
 }
