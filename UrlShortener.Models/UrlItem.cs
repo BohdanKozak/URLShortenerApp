@@ -13,5 +13,7 @@ namespace URLShortener.Models
         public string? ShortCode { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public string? CreatedBy { get; set; }
+
+        public static Dictionary<string, string> urlMappings = new Dictionary<string, string>();
     }
 }

@@ -15,6 +15,7 @@ namespace URLShortener.Controllers
 
     {
         UserManager<IdentityUser> UserManager;
+
         private readonly IUnitOfWork _unitOfWork;
         private const string ServiceUrl = "http://localhost:7254";
         public URLItemController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager)
@@ -34,7 +35,7 @@ namespace URLShortener.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_USER)]
         [HttpPost]
         public IActionResult Create(UrlItem obj)
         {
@@ -54,8 +55,19 @@ namespace URLShortener.Controllers
             if (shortenedUrl == null)
             {
                 var shortCode = ShortId.Generate(new GenerationOptions(length: 9));
-                obj.ShortedUrl = $"{ServiceUrl}?u={shortCode}";
+
+
+
+
+                obj.ShortedUrl = $"{ServiceUrl}/{shortCode}";
+
+                if (obj.Url != null) UrlItem.urlMappings.Add(obj.ShortedUrl, obj.Url);
+
+
                 obj.ShortCode = shortCode;
+
+
+
                 obj.CreatedBy = UserManager.GetUserName(User);
             }
             else
@@ -70,6 +82,7 @@ namespace URLShortener.Controllers
 
                 _unitOfWork.UrlItem.Add(obj);
                 _unitOfWork.Save();
+                TempData["success"] = "URL is added successfully";
                 return RedirectToAction("Index");
             }
 
@@ -77,6 +90,7 @@ namespace URLShortener.Controllers
             return View();
         }
 
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_USER)]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -90,18 +104,26 @@ namespace URLShortener.Controllers
                 return NotFound();
             }
 
-            _unitOfWork.UrlItem.Remove(url);
-            _unitOfWork.Save();
+            if (url.CreatedBy == UserManager.GetUserName(User))
+            {
+                _unitOfWork.UrlItem.Remove(url);
+                _unitOfWork.Save();
+                TempData["success"] = "URL is deleted successfully";
+
+            }
+
+
+
 
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_USER)]
         public IActionResult Details(int? id)
         {
             UrlItem UrlItems = _unitOfWork.UrlItem.Get(item => item.Id == id);
             return View(UrlItems);
         }
-
+        [Authorize(Roles = SD.Role_Admin)]
         public IActionResult DeleteAll()
         {
 
@@ -109,10 +131,7 @@ namespace URLShortener.Controllers
 
             foreach (var urlItem in UrlItems)
             {
-
                 _unitOfWork.UrlItem.Remove(urlItem);
-
-
             }
             _unitOfWork.Save();
             return RedirectToAction("Index");
